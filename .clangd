@@ -1,0 +1,34 @@
+CompileFlags:
+  Add:
+    # บอก clangd ว่าเรากำลังเขียนโค้ดให้ ARM Cortex-M4 (STM32F4)
+    - "--target=arm-none-eabi"
+    - "-mcpu=cortex-m4"
+    - "-mthumb"
+    - "-DSTM32F401xE"
+    - "-DUSE_HAL_DRIVER"
+    
+    # Sysroot และ Standard Library Headers สำหรับ arm-none-eabi
+    - "--sysroot=/home/fidaxc/st/stm32cubeide_2.2.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/arm-none-eabi"
+    - "-isystem"
+    - "/home/fidaxc/st/stm32cubeide_2.2.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.linux64_1.0.100.202602081740/tools/lib/gcc/arm-none-eabi/14.3.1/include"
+
+    # รวม Path ทั้งหมดในโปรเจกต์
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Inc"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Drivers/STM32F4xx_HAL_Driver/Inc"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Drivers/CMSIS/Include"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Middlewares/NXP_PlugAndTrust"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Middlewares/NXP_PlugAndTrust/sss/inc"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Middlewares/NXP_PlugAndTrust/sss/port/default"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Middlewares/NXP_PlugAndTrust/hostlib/hostLib/inc"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Middlewares/NXP_PlugAndTrust/hostlib/hostLib/libCommon/infra"
+    - "-I/home/fidaxc/STM32CubeIDE/workspace_2.2.0/FlashDriveX_PoC/Middlewares/NXP_PlugAndTrust/hostlib/hostLib/se05x"
+
+  # ปิดการเตือนเรื่องระบบการค้นหา C Standard Library บน Host
+  Remove:
+    - "-mabi=*"
+
+Diagnostics:
+  Includes:
+    IgnoreHeader:
+      - ".*stm32.*"
